@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="The latest international news from Frivizn, featuring top stories from around the world and breaking news, as it happens."
+        />
+        <meta name="author" content="dukibu" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>NEWS</title>
+
+        <link
+            href="https://fonts.googleapis.com/css?family=Exo+2:400,700|Open+Sans&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="stylesheets/normalize.css" />
+        <link rel="stylesheet" href="stylesheets/main.css" />
+        <script src="javascripts/he.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+
+    <body id="top">
+        <div class="content-wrap">
+            <!-- Header -->
+            <header role="banner">
+                <section class="nav-section">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/" title="Five Mem">Five Mem</a>
+                    </div>
+
+                    <!-- Navigation -->
+                    <nav class="nav-menu" role="navigation">
+                        <ul class="nav-links">
+                            <li><a href="/" title="Home">Home</a></li>
+                            <li>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    placeholder="Search"
+                                />
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+                <!-- end of class="nav-section"-->
+            </header>
+
+            <!-- Main -->
+            <div class="main" role="main">
+                <div class="top-news"></div>
+            </div>
+            <div class="main" role="main"></div>
+
+            <div
+                style="
+                    width: 100%;
+                    display: flex;
+                    justify-content: end;
+                    align-items: center;
+                    padding-bottom: 2rem;
+                    font-size: large;
+                "
+            >
+                <button
+                    id="btnMore"
+                    style="
+                        border-radius: 10px;
+                        background-color: #0866ff;
+                        color: #fff;
+                    "
+                >
+                    More ...
+                </button>
+            </div>
+
+            <div class="footer-links">
+                <ul class="social-media-links">
+                    <li>
+                        <a href="http://twitter.com"
+                            ><span class="screen-reader-text">Twitter</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="http://facebook.com"
+                            ><span class="screen-reader-text">Facebook</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="http://linkedin.com"
+                            ><span class="screen-reader-text">LinkedIn</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="http://youtube.com"
+                            ><span class="screen-reader-text">YouTube</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="http://instagram.com"
+                            ><span class="screen-reader-text"
+                                >Instagram</span
+                            ></a
+                        >
+                    </li>
+                </ul>
+
+                <ul class="main-footer-links">
+                    <li><a href="#world" title="World">World</a></li>
+                    <li><a href="#politics" title="Politics">Politics</a></li>
+                    <li><a href="#business" title="Business">Business</a></li>
+                    <li><a href="#sport" title="Sport">Sport</a></li>
+                    <li>
+                        <a href="#entertainment" title="Entertainment"
+                            >Entertainment</a
+                        >
+                    </li>
+                    <li><a href="#science" title="Science">Science</a></li>
+                    <li><a href="#travel" title="Travel">Travel</a></li>
+                    <li><a href="#health" title="Health">Health</a></li>
+                    <li><a href="#style" title="Style">Style</a></li>
+                    <li><a href="#weather" title="Weather">Weather</a></li>
+                    <li><a href="#video" title="Video">Video</a></li>
+                </ul>
+
+                <ul class="info-links">
+                    <li>
+                        <a href="#terms-of-use" title="Terms of Use"
+                            >Terms of Use</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#privacy-policy" title="Privacy Policy"
+                            >Privacy Policy</a
+                        >
+                    </li>
+                    <li><a href="#about-us" title="About Us">About Us</a></li>
+                    <li>
+                        <a href="#advertising" title="Advertising"
+                            >Advertising</a
+                        >
+                    </li>
+                    <li><a href="#sitemap" title="Sitemap">Sitemap</a></li>
+                </ul>
+
+                <ul class="our-address">
+                    <li>Our Address:</li>
+                    <li>Main Street 123</li>
+                    <li>New York, NY 10000</li>
+                    <li>111-222-3333</li>
+                </ul>
+            </div>
+            <!-- End of class="footer-links" -->
+
+            <!-- Footer Credit -->
+            <footer role="contentinfo">
+                <p>2019 &copy; by Frivizn Studio</p>
+                <a class="scroll-top" href="#top"></a>
+            </footer>
+        </div>
+        <!-- end of class="content-wrap" -->
+
+        <!-- <script src="js/modernizr.js"></script> -->
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+        ></script>
+        <script src="javascripts/main.js"></script>
+        <script defer>
+            // Function to create a headline element
+            function createStockNew(headlineText, linkHref) {
+                const headlineDiv = document.createElement("div");
+                headlineDiv.classList.add("headline");
+
+                const link = document.createElement("a");
+                link.href = linkHref;
+
+                const h1 = document.createElement("h1");
+                h1.textContent = headlineText;
+
+                link.appendChild(h1);
+                headlineDiv.appendChild(link);
+
+                return headlineDiv;
+            }
+
+            // Function to create the latest-news section
+            function createLatestNews() {
+                const latestNewsSection = document.createElement("section");
+                latestNewsSection.classList.add("latest-news");
+
+                const headlineDivLatest = createStockNew(
+                    "Lorem ipsum dolor sit amet",
+                    "/"
+                );
+                const pHotNew = document.createElement("p");
+                pHotNew.textContent = "Hot New";
+
+                headlineDivLatest.insertBefore(
+                    pHotNew,
+                    headlineDivLatest.firstChild
+                );
+
+                latestNewsSection.appendChild(headlineDivLatest);
+
+                return latestNewsSection;
+            }
+
+            // Function to create the top-stories section
+            function createTopStoriesSection() {
+                const topStoriesSection = document.createElement("section");
+                topStoriesSection.classList.add("top-stories");
+
+                const h2TopStories = document.createElement("h2");
+                h2TopStories.textContent = "Latest stock news";
+                topStoriesSection.appendChild(h2TopStories);
+
+                // Create and append headline elements
+                for (let i = 1; i <= 3; i++) {
+                    const headlineText = `Quisque sit amet mi lectus ${i}`;
+                    const linkHref = "#";
+
+                    const headline = createStockNew(headlineText, linkHref);
+                    headline.classList.add(`headline-${i}`);
+                    topStoriesSection.appendChild(headline);
+                }
+
+                return topStoriesSection;
+            }
+            function createStory(
+                id,
+                imageSrc,
+                imageAlt,
+                headlineText,
+                exactTime,
+                linkArticle
+            ) {
+                const storyDiv = document.createElement("div");
+                storyDiv.id = id;
+                storyDiv.classList.add("story");
+
+                const link = document.createElement("a");
+                link.href = "/article/" + id;
+
+                const storyImgDiv = document.createElement("div");
+                storyImgDiv.classList.add("story-img");
+
+                const img = document.createElement("img");
+                img.src = imageSrc;
+                img.alt = imageAlt;
+
+                storyImgDiv.appendChild(img);
+
+                const storyHeadlineDiv = document.createElement("div");
+                storyHeadlineDiv.classList.add("story-headline");
+
+                const h3 = document.createElement("h3");
+                h3.textContent = headlineText;
+
+                const pExactTime = document.createElement("p");
+                pExactTime.classList.add("exact-time");
+                pExactTime.textContent = exactTime;
+
+                storyHeadlineDiv.appendChild(h3);
+                storyHeadlineDiv.appendChild(pExactTime);
+
+                link.appendChild(storyImgDiv);
+                link.appendChild(storyHeadlineDiv);
+
+                storyDiv.appendChild(link);
+
+                return storyDiv;
+            }
+
+            // Function to create the world section
+            function createWorldSection(data, title = "") {
+                const worldSection = document.createElement("section");
+                worldSection.classList.add("world");
+
+                // Create and append h2 element
+                const h2 = document.createElement("h2");
+                h2.textContent = title;
+                worldSection.appendChild(h2);
+
+                // Create and append story elements
+                for (let i = 0; i < 3; i++) {
+                    const imageSrc = data[i]["urlToImage"];
+                    const imageAlt = data[i]["description"];
+                    const headlineText = data[i]["title"];
+                    const exactTime = data[i]["publishedAt"];
+                    const linkArticle = data[i]["url"];
+
+                    const story = createStory(
+                        data[i]["_id"],
+                        imageSrc,
+                        imageAlt,
+                        headlineText,
+                        exactTime,
+                        linkArticle
+                    );
+                    story.classList.add(`story-${i + 1}`);
+                    worldSection.appendChild(story);
+                }
+                return worldSection;
+            }
+
+            function insertASectionIntoMain(data, title = "") {
+                var main_new = document.getElementsByClassName("main")[1];
+                var section = createWorldSection(data, title);
+                if (main_new !== null) {
+                    main_new.appendChild(section);
+                }
+            }
+
+            function insertDataIntoMain(data, title = "") {
+                dataASection = [];
+                for (let i = 0; i < data.length; i++) {
+                    dataASection.push(data[i]);
+                    if (dataASection.length == 3) {
+                        if (i == 2) {
+                            insertASectionIntoMain(dataASection, title);
+                        } else {
+                            insertASectionIntoMain(dataASection);
+                        }
+                        dataASection = [];
+                    }
+                }
+            }
+
+            function clearMain() {
+                var main_new = document.getElementsByClassName("main")[1];
+                main_new.innerHTML = "";
+            }
+
+            var serverData = "<%= data %>";
+            dataDecoded = he.decode(serverData.replace(/amp;/g, ""));
+            data = JSON.parse(dataDecoded);
+            insertDataIntoMain(data, "List news for you");
+        </script>
+        <script defer src="javascripts/index.js"></script>
+    </body>
+</html>
