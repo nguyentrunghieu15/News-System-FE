@@ -249,9 +249,9 @@
         ></script>
         <script defer>
             var headline = document.getElementsByClassName("headline")[0];
-            headline.style.background = "url(" + data["urlToImage"] + ")";
+            headline.style.background = `url(${data["urlToImage"]})`;
             var reference = document.getElementById("reference");
-            reference.href = data["url"]
+            reference.href = data["url"];
         </script>
         <script src="/javascripts/main.js"></script>
     </body>

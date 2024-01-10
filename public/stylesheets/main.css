@@ -5,7 +5,7 @@
 :root {
     --smoky-black: #0c0c0c;
     --raisin-black: #222222;
-    --lapis-lazuli: #0866FF;
+    --lapis-lazuli: #0866ff;
     --dark-medium-gray: hsl(214, 100%, 90%);
     --cornell-red: #bb1919;
     --anti-flash-white: #f1f1f1;
@@ -225,6 +225,36 @@ img {
     justify-content: space-between;
 }
 
+.headline-lastest-news {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.headline-lastest-news p{
+    margin: 0;
+    padding: 15px;
+    background: var(--cornell-red);
+    color: var(--anti-flash-white);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.headline-lastest-news h1 {
+    font-size: 1rem;
+    text-transform: capitalize;
+    color: var(--anti-flash-white);
+    padding-left: 15px;
+}
+
 .headline p {
     margin: 0;
     padding: 15px;
@@ -260,27 +290,6 @@ img {
     display: flex;
     margin: 10px;
     justify-content: flex-end;
-}
-
-.top-stories .headline-1 {
-    background: url(../images/politics1.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.top-stories .headline-2 {
-    background: url(../images/politics3.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.top-stories .headline-3 {
-    background: url(../images/politics6.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .story a {
@@ -535,9 +544,9 @@ input[type="submit"] {
 }
 
 #searchInput {
-  opacity: 0.5;
-  background-color: white;
-  height: 33px;
+    opacity: 0.5;
+    background-color: white;
+    height: 33px;
 }
 
 /*
@@ -1004,4 +1013,3 @@ input[type="submit"] {
         border: none;
     }
 }
-

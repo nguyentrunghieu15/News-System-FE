@@ -1,0 +1,4 @@
+PORT = 3300
+BACKEND_URL = http://127.0.0.1:3030
+KAFKA_URI =  localhost
+KAFKA_PORT = 9094

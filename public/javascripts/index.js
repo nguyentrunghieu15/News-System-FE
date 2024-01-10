@@ -18,9 +18,9 @@ searchInput.addEventListener("keydown", async function (event) {
             });
             const data = response.data;
             clearMain();
-            insertDataIntoMain(data,"List result search for you");
-        }else{
-            window.location.href='/'
+            insertDataIntoMain(data, "List result search for you");
+        } else {
+            window.location.href = "/";
         }
     }
 });
@@ -52,3 +52,5 @@ buttonMore.addEventListener("click", async function (event) {
         insertDataIntoMain(data);
     }
 });
+
+

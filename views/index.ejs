@@ -25,6 +25,11 @@
         <link rel="stylesheet" href="stylesheets/main.css" />
         <script src="javascripts/he.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+        <script>
+            var socket = io();
+            window.localStorage.setItem("START_TIME", Date.now());
+        </script>
     </head>
 
     <body id="top">
@@ -56,10 +61,64 @@
 
             <!-- Main -->
             <div class="main" role="main">
-                <div class="top-news"></div>
+                <div class="top-news">
+                    <section class="latest-news">
+                        <div class="headline-lastest-news">
+                            <p>Hot New</p>
+                            <a href="/"><h1>Lorem ipsum dolor sit amet</h1></a>
+                        </div>
+                    </section>
+                    <section class="top-stories">
+                        <h2>Latest stock news</h2>
+                        <!-- TradingView Widget BEGIN -->
+                        <div class="tradingview-widget-container">
+                            <div
+                                class="tradingview-widget-container__widget"
+                            ></div>
+                            <div class="tradingview-widget-copyright">
+                                <a
+                                    href="https://www.tradingview.com/"
+                                    rel="noopener nofollow"
+                                    target="_blank"
+                                    ><span class="blue-text"
+                                        >Track all markets on TradingView</span
+                                    ></a
+                                >
+                            </div>
+                            <script
+                                type="text/javascript"
+                                src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js"
+                                async
+                            >
+                                var temp =  {
+                                  "colorTheme": "light",
+                                  "dateRange": "12M",
+                                  "exchange": "US",
+                                  "showChart": true,
+                                  "locale": "en",
+                                  "largeChartUrl": "",
+                                  "isTransparent": false,
+                                  "showSymbolLogo": false,
+                                  "showFloatingTooltip": false,
+                                  "width": "400",
+                                  "height": "600",
+                                  "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                                  "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                                  "gridLineColor": "rgba(240, 243, 250, 0)",
+                                  "scaleFontColor": "rgba(106, 109, 120, 1)",
+                                  "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                                  "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                                  "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                                  "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                                  "symbolActiveColor": "rgba(41, 98, 255, 0.12)"
+                                }
+                            </script>
+                        </div>
+                        <!-- TradingView Widget END -->
+                    </section>
+                </div>
             </div>
             <div class="main" role="main"></div>
-
             <div
                 style="
                     width: 100%;
@@ -245,11 +304,11 @@
                 linkArticle
             ) {
                 const storyDiv = document.createElement("div");
-                storyDiv.id = id;
                 storyDiv.classList.add("story");
 
                 const link = document.createElement("a");
-                link.href = "/article/" + id;
+                link.href = `/article/${id}`;
+                link.id = id;
 
                 const storyImgDiv = document.createElement("div");
                 storyImgDiv.classList.add("story-img");
@@ -277,7 +336,6 @@
                 link.appendChild(storyHeadlineDiv);
 
                 storyDiv.appendChild(link);
-
                 return storyDiv;
             }
 
@@ -340,11 +398,15 @@
                 var main_new = document.getElementsByClassName("main")[1];
                 main_new.innerHTML = "";
             }
-
             var serverData = "<%= data %>";
             dataDecoded = he.decode(serverData.replace(/amp;/g, ""));
             data = JSON.parse(dataDecoded);
             insertDataIntoMain(data, "List news for you");
+            window.addEventListener("click", sendEventKafka);
+            window.addEventListener("mouseover", sendEventKafka);
+            window.addEventListener("dblclick", sendEventKafka);
+            window.addEventListener("drag", sendEventKafka);
+            window.addEventListener("drop", sendEventKafka);
         </script>
         <script defer src="javascripts/index.js"></script>
     </body>
