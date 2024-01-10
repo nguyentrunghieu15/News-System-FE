@@ -235,66 +235,6 @@
         ></script>
         <script src="javascripts/main.js"></script>
         <script defer>
-            // Function to create a headline element
-            function createStockNew(headlineText, linkHref) {
-                const headlineDiv = document.createElement("div");
-                headlineDiv.classList.add("headline");
-
-                const link = document.createElement("a");
-                link.href = linkHref;
-
-                const h1 = document.createElement("h1");
-                h1.textContent = headlineText;
-
-                link.appendChild(h1);
-                headlineDiv.appendChild(link);
-
-                return headlineDiv;
-            }
-
-            // Function to create the latest-news section
-            function createLatestNews() {
-                const latestNewsSection = document.createElement("section");
-                latestNewsSection.classList.add("latest-news");
-
-                const headlineDivLatest = createStockNew(
-                    "Lorem ipsum dolor sit amet",
-                    "/"
-                );
-                const pHotNew = document.createElement("p");
-                pHotNew.textContent = "Hot New";
-
-                headlineDivLatest.insertBefore(
-                    pHotNew,
-                    headlineDivLatest.firstChild
-                );
-
-                latestNewsSection.appendChild(headlineDivLatest);
-
-                return latestNewsSection;
-            }
-
-            // Function to create the top-stories section
-            function createTopStoriesSection() {
-                const topStoriesSection = document.createElement("section");
-                topStoriesSection.classList.add("top-stories");
-
-                const h2TopStories = document.createElement("h2");
-                h2TopStories.textContent = "Latest stock news";
-                topStoriesSection.appendChild(h2TopStories);
-
-                // Create and append headline elements
-                for (let i = 1; i <= 3; i++) {
-                    const headlineText = `Quisque sit amet mi lectus ${i}`;
-                    const linkHref = "#";
-
-                    const headline = createStockNew(headlineText, linkHref);
-                    headline.classList.add(`headline-${i}`);
-                    topStoriesSection.appendChild(headline);
-                }
-
-                return topStoriesSection;
-            }
             function createStory(
                 id,
                 imageSrc,
@@ -401,7 +341,16 @@
             var serverData = "<%= data %>";
             dataDecoded = he.decode(serverData.replace(/amp;/g, ""));
             data = JSON.parse(dataDecoded);
-            insertDataIntoMain(data, "List news for you");
+            insertDataIntoMain(data["listNews"], "List news for you");
+
+            console.log(data["lastestNews"]);
+            const lastestNews = document.getElementsByClassName(
+                "headline-lastest-news"
+            )[0];
+            lastestNews.style.background = `url(${data["lastestNews"].urlToImage})`;
+            lastestNews.lastElementChild.href = data["lastestNews"].url;
+            lastestNews.lastElementChild.lastElementChild.innerHTML =
+                data["lastestNews"].title;
             window.addEventListener("click", sendEventKafka);
             window.addEventListener("mouseover", sendEventKafka);
             window.addEventListener("dblclick", sendEventKafka);

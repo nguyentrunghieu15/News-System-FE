@@ -12,8 +12,19 @@ router.get("/", async function (req, res, next) {
     });
     data = {};
     if (response.status === 200) {
-        data = response.data;
+        data["listNews"] = response.data;
     }
+
+    var response = await axios.request({
+        method: "get",
+        baseURL: process.env["BACKEND_URL"],
+        url: "news/lastest",
+    });
+
+    if (response.status === 200) {
+        data["lastestNews"] = response.data;
+    }
+
     data2string = JSON.stringify(data);
     dataEncoded = he.encode(data2string, { encodeEverything: true });
     res.render("index", { data: dataEncoded });
@@ -24,7 +35,7 @@ router.get("/more", async function (req, res, next) {
         method: "get",
         baseURL: process.env["BACKEND_URL"],
         url: "news/common-articles",
-        params:req.query
+        params: req.query,
     });
     data = {};
     if (response.status === 200) {
@@ -38,7 +49,7 @@ router.get("/search", async function (req, res, next) {
         method: "get",
         baseURL: process.env["BACKEND_URL"],
         url: "news/search",
-        params:req.query
+        params: req.query,
     });
     data = {};
     if (response.status === 200) {
