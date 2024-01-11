@@ -28,7 +28,7 @@
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
         <script>
             var socket = io();
-            window.localStorage.setItem("START_TIME", Date.now());
+            window.sessionStorage.setItem("START_TIME", Date.now());
         </script>
     </head>
 
@@ -343,7 +343,6 @@
             data = JSON.parse(dataDecoded);
             insertDataIntoMain(data["listNews"], "List news for you");
 
-            console.log(data["lastestNews"]);
             const lastestNews = document.getElementsByClassName(
                 "headline-lastest-news"
             )[0];

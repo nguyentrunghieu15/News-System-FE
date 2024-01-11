@@ -30,6 +30,11 @@
             var dataDecoded = he.decode(serverData.replace(/amp;/g, ""));
             data = JSON.parse(dataDecoded);
         </script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+        <script>
+            var socket = io();
+            window.sessionStorage.setItem("START_TIME", Date.now());
+        </script>
     </head>
 
     <body>
@@ -242,6 +247,7 @@
         <!-- end of class="content-wrap" -->
 
         <!-- <script src="js/modernizr.js"></script> -->
+        <script src="/javascripts/main.js"></script>
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -252,7 +258,11 @@
             headline.style.background = `url(${data["urlToImage"]})`;
             var reference = document.getElementById("reference");
             reference.href = data["url"];
+            window.addEventListener("click", sendEventKafka);
+            window.addEventListener("mouseover", sendEventKafka);
+            window.addEventListener("dblclick", sendEventKafka);
+            window.addEventListener("drag", sendEventKafka);
+            window.addEventListener("drop", sendEventKafka);
         </script>
-        <script src="/javascripts/main.js"></script>
     </body>
 </html>

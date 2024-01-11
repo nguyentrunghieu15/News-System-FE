@@ -26,54 +26,70 @@ $("a[href='#top']").click(function () {
     return false;
 });
 
+function checkValidKey(key) {
+    var invalidKeys = ["serverData", "data", "view", "currentTarget"];
+    return invalidKeys.findIndex((e) => e === key) === -1;
+}
+
+function checkValidEvent(e) {
+    return e["target"]["tagName"] !== "BODY";
+}
+
+function fillterChildObject(obj) {
+    result = {};
+    for (const key in obj) {
+        if (
+            checkValidKey(key) &&
+            typeof obj[key] !== "object" &&
+            obj[key] !== null &&
+            obj[key] !== "" &&
+            typeof obj[key] !== "function"
+        ) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+
+function isEmpty(value) {
+    for (let prop in value) {
+        if (value.hasOwnProperty(prop)) return false;
+    }
+    return true;
+}
+
 function sendEventKafka(e) {
     const excludeElement = ["BODY"];
 
-    if (
-        excludeElement.findIndex(
-            (value) => e["originalTarget"]["tagName"] === value
-        ) !== -1
-    ) {
+    if (!checkValidEvent(e)) {
         return;
     }
 
-    const listKey = [
-        "clientX",
-        "clientY",
-        "layerX",
-        "layerY",
-        "pageX",
-        "pageX",
-        "type",
-        "originalTarget.baseURI",
-        "originalTarget.innerHTML",
-        "originalTarget.innerText",
-        "originalTarget.localName",
-        "originalTarget.nodeName",
-        "originalTarget.outerHTML",
-        "originalTarget.outerHTML",
-        "originalTarget.tagName",
-        "originalTarget.textContent",
-        "originalTarget.title",
-        "originalTarget.alt",
-    ];
     var clientEvent = {};
-    listKey.forEach(function (key) {
-        var keyParts = key.split("."); // Handle nested properties
-        var value = e;
-        for (var i = 0; i < keyParts.length; i++) {
-            value = value[keyParts[i]];
-            if (value === undefined) {
-                // Handle undefined values
-                break;
-            }
+
+    for (const key in e) {
+        if (
+            checkValidKey(key) &&
+            typeof e[key] !== "object" &&
+            typeof e[key] !== "function" &&
+            e[key] !== null &&
+            e[key] !== ""
+        ) {
+            clientEvent[key] = e[key];
         }
-        clientEvent[key] = value;
-    });
+        if (
+            checkValidKey(key) &&
+            typeof e[key] === "object" &&
+            !isEmpty(e[key])
+        ) {
+            clientEvent[key] = fillterChildObject(e[key]);
+        }
+    }
+    clientEvent["target"] = fillterChildObject(e["target"]);
 
     clientEvent["sessionTime"] = Math.floor(
-        (Date.now() - window.localStorage.getItem("START_TIME")) / 1000
+        (Date.now() - window.sessionStorage.getItem("START_TIME")) / 1000
     );
-
+    console.log(clientEvent);
     socket.emit("event_kafka", JSON.stringify(clientEvent));
 }
